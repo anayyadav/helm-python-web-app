@@ -1,0 +1,14 @@
+{{- if .Values.pdb.enabled }}
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ include "python-webapp.fullname" . }}
+  labels:
+    {{- include "python-webapp.labels" . | nindent 4 }}
+spec:
+{{- if .Values.pdb.minAvailable }}
+  minAvailable: {{ .Values.pdb.minAvailable }}
+{{- end }}
+  selector:
+    {{- include "python-webapp.selectorLabels" . | nindent 4 }}
+{{- end }}
