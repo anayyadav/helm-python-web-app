@@ -10,5 +10,6 @@ spec:
   minAvailable: {{ .Values.pdb.minAvailable }}
 {{- end }}
   selector:
-    {{- include "python-webapp.selectorLabels" . | nindent 4 }}
+    matchLabels:
+      {{- include "python-webapp.selectorLabels" . | nindent 6 }}
 {{- end }}
