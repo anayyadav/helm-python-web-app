@@ -29,24 +29,16 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-          - containerPort: 5000
+            - containerPort: 5000
           envFrom:
           {{- if .Values.configmap.enabled }}
             - configMapRef:
                 name: {{ include "python-webapp.fullname" . }}
           {{- end }}
           livenessProbe:
-            tcpSocket:
-              port: 5000
-            initialDelaySeconds: 10
-            periodSeconds: 50
-            failureThreshold: 8
+            {{- toYaml .Values.livenessprobe | nindent 12 }}
           readinessProbe:
-            tcpSocket:
-              port: 5000
-            initialDelaySeconds: 10
-            periodSeconds: 50
-            failureThreshold: 8
+            {{- toYaml .Values.readinessprobe | nindent 12 }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
