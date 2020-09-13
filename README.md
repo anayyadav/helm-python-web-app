@@ -18,4 +18,4 @@ Deployment specs:
 8. All configuration to be used from 'values.yml' file.
 
 
-NOTE: I have used Nodeport service type, which will run on 30005 of k8s cluster. I have used Liveness Probe and Readiness Probe fr health cehck.
+NOTE: I have used Nodeport service type, which will run on 30005 of k8s cluster. I have used Liveness Probe and Readiness Probe for health cehck.
